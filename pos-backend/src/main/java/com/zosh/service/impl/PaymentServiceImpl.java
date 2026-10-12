@@ -40,6 +40,9 @@ public class PaymentServiceImpl implements PaymentService {
     @Value("${razorpay.api.secret}")
     private String apiSecret;
 
+    @Value("${app.frontend.url:http://localhost:5173}")
+    private String frontendUrl;
+
 
     private final PaymentOrderRepository paymentOrderRepository;
     private final SubscriptionPlanRepository subscriptionPlanRepository;
@@ -189,7 +192,7 @@ public class PaymentServiceImpl implements PaymentService {
 
             // Set the callback URL and method
             paymentLinkRequest.put("callback_url",
-                    "http://localhost:5173/payment-success/"+planId);
+                    frontendUrl + "/payment-success/" + planId);
             paymentLinkRequest.put("callback_method","get");
 
             PaymentLink payment = razorpay.paymentLink.create(paymentLinkRequest);
@@ -210,8 +213,8 @@ public class PaymentServiceImpl implements PaymentService {
         SessionCreateParams params = SessionCreateParams.builder()
                 .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                 .setMode(SessionCreateParams.Mode.PAYMENT)
-                .setSuccessUrl("http://localhost:5173/payment-success/"+orderId)
-                .setCancelUrl("http://localhost:5173/payment/cancel")
+                .setSuccessUrl(frontendUrl + "/payment-success/" + orderId)
+                .setCancelUrl(frontendUrl + "/payment/cancel")
                 .addLineItem(SessionCreateParams.LineItem.builder()
                         .setQuantity(1L)
                         .setPriceData(SessionCreateParams.LineItem.PriceData.builder()

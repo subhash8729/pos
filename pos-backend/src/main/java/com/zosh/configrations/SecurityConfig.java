@@ -14,8 +14,10 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import org.springframework.beans.factory.annotation.Value;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 
 @Configuration
@@ -23,6 +25,9 @@ public class SecurityConfig {
 	
 	@Autowired
 	private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+
+	@Value("${app.cors.allowed-origins:http://localhost:3000,http://localhost:5173,https://zosh-pos.vercel.app,https://pos-sytem-bcs6.vercel.app}")
+	private String allowedOrigins;
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -51,12 +56,15 @@ public class SecurityConfig {
 			@Override
 			public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
 				CorsConfiguration cfg = new CorsConfiguration();
-				cfg.setAllowedOrigins(Arrays.asList(
-						"http://localhost:3000",
-						"http://localhost:5173",
-						"https://zosh-pos.vercel.app",
-						"https://pos-sytem-bcs6.vercel.app"
-				));
+				if (allowedOrigins != null && !allowedOrigins.trim().isEmpty()) {
+					List<String> origins = Arrays.stream(allowedOrigins.split(","))
+							.map(String::trim)
+							.filter(s -> !s.isEmpty())
+							.toList();
+					cfg.setAllowedOriginPatterns(origins);
+				} else {
+					cfg.setAllowedOriginPatterns(Collections.singletonList("*"));
+				}
 				cfg.setAllowedMethods(Collections.singletonList("*"));
 				cfg.setAllowCredentials(true);
 				cfg.setAllowedHeaders(Collections.singletonList("*"));

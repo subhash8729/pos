@@ -9,13 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
 
-    @GetMapping
+    @GetMapping({"/", "/health"})
     public ResponseEntity<ApiResponse> HomeControllerHandler() {
-        
-        return ResponseEntity.status(
-                        HttpStatus.OK)
-                .body(new ApiResponse(
-                        "welcome to interview hub system"
-                ));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ApiResponse("POS System Backend is running!"));
     }
 }
