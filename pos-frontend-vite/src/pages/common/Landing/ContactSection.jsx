@@ -115,8 +115,8 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="font-medium mb-1">Phone</p>
-                    <p className="opacity-90">+91 98765 43210</p>
-                    <p className="opacity-90">+91 98765 43211</p>
+                    <p className="opacity-90">+91 89497 33856</p>
+                    <p className="opacity-90">+91 79765 80896</p>
                   </div>
                 </div>
                 
@@ -126,8 +126,8 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="font-medium mb-1">Email</p>
-                    <p className="opacity-90">sales@pospro.com</p>
-                    <p className="opacity-90">support@pospro.com</p>
+                    <p className="opacity-90">bohra0022@pospro.com</p>
+                    <p className="opacity-90">subhash8729@gmail.com</p>
                   </div>
                 </div>
                 
@@ -137,8 +137,8 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="font-medium mb-1">Office Address</p>
-                    <p className="opacity-90">123 Tech Park, Whitefield</p>
-                    <p className="opacity-90">Bangalore, Karnataka 560066</p>
+                    <p className="opacity-90">A32 Silver Arcade Jaipur</p>
+                    <p className="opacity-90">Jaipur, Rajasthan 302019</p>
                   </div>
                 </div>
                 
